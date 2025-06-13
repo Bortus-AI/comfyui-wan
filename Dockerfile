@@ -44,7 +44,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 # ComfyUI install
 # ------------------------------------------------------------
 RUN --mount=type=cache,target=/root/.cache/pip \
-    /usr/bin/yes | comfy --workspace /ComfyUI install
+    /usr/bin/yes | comfy --workspace /home/Ubuntu/ComfyUI install
 
 FROM base AS final
 # Make sure to use the virtual environment here too
@@ -80,18 +80,18 @@ RUN for repo in \
     https://github.com/1038lab/ComfyUI-RMBG.git \
     https://github.com/M1kep/ComfyLiterals.git; \
     do \
-        cd /ComfyUI/custom_nodes; \
+        cd /home/Ubuntu/ComfyUI/custom_nodes; \
         repo_dir=$(basename "$repo" .git); \
         if [ "$repo" = "https://github.com/ssitu/ComfyUI_UltimateSDUpscale.git" ]; then \
             git clone --recursive "$repo"; \
         else \
             git clone "$repo"; \
         fi; \
-        if [ -f "/ComfyUI/custom_nodes/$repo_dir/requirements.txt" ]; then \
-            pip install -r "/ComfyUI/custom_nodes/$repo_dir/requirements.txt"; \
+        if [ -f "/home/Ubuntu/ComfyUI/custom_nodes/$repo_dir/requirements.txt" ]; then \
+            pip install -r "/home/Ubuntu/ComfyUI/custom_nodes/$repo_dir/requirements.txt"; \
         fi; \
-        if [ -f "/ComfyUI/custom_nodes/$repo_dir/install.py" ]; then \
-            python "/ComfyUI/custom_nodes/$repo_dir/install.py"; \
+        if [ -f "/home/Ubuntu/ComfyUI/custom_nodes/$repo_dir/install.py" ]; then \
+            python "/home/Ubuntu/ComfyUI/custom_nodes/$repo_dir/install.py"; \
         fi; \
     done
 
