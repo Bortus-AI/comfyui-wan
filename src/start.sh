@@ -5,12 +5,12 @@ TCMALLOC="$(ldconfig -p | grep -Po "libtcmalloc.so.\d" | head -n 1)"
 export LD_PRELOAD="${TCMALLOC}"
 
 # This is in case there's any special installs or overrides that needs to occur when starting the machine before starting ComfyUI
-if [ -f "/workspace/additional_params.sh" ]; then
-    chmod +x /workspace/additional_params.sh
+if [ -f "/home/Ubuntu/additional_params.sh" ]; then
+    chmod +x /home/Ubuntu/additional_params.sh
     echo "Executing additional_params.sh..."
-    /workspace/additional_params.sh
+    /home/Ubuntu/additional_params.sh
 else
-    echo "additional_params.sh not found in /workspace. Skipping..."
+    echo "additional_params.sh not found in /home/Ubuntu. Skipping..."
 fi
 
 if ! which aria2 > /dev/null 2>&1; then
@@ -28,7 +28,7 @@ else
 fi
 
 # Set the network volume path
-NETWORK_VOLUME="/workspace"
+NETWORK_VOLUME="/home/Ubuntu"
 URL="http://127.0.0.1:8188"
 
 # Check if NETWORK_VOLUME exists; if not, use root directory instead
@@ -39,7 +39,7 @@ if [ ! -d "$NETWORK_VOLUME" ]; then
     jupyter-lab --ip=0.0.0.0 --allow-root --no-browser --NotebookApp.token='' --NotebookApp.password='' --ServerApp.allow_origin='*' --ServerApp.allow_credentials=True --notebook-dir=/ &
 else
     echo "NETWORK_VOLUME directory exists. Starting JupyterLab..."
-    jupyter-lab --ip=0.0.0.0 --allow-root --no-browser --NotebookApp.token='' --NotebookApp.password='' --ServerApp.allow_origin='*' --ServerApp.allow_credentials=True --notebook-dir=/workspace &
+    jupyter-lab --ip=0.0.0.0 --allow-root --no-browser --NotebookApp.token='' --NotebookApp.password='' --ServerApp.allow_origin='*' --ServerApp.allow_credentials=True --notebook-dir=/home/Ubuntu &
 fi
 
 COMFYUI_DIR="$NETWORK_VOLUME/ComfyUI"
