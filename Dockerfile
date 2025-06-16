@@ -57,7 +57,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
     pip cache purge
 
 # Install custom nodes (optimize with fewer layers)
-RUN cd /home/Ubuntu/ComfyUI/custom_nodes && \
+RUN cd /ComfyUI/custom_nodes && \
     for repo in \
         https://github.com/ssitu/ComfyUI_UltimateSDUpscale.git \
         https://github.com/kijai/ComfyUI-KJNodes.git \
