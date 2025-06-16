@@ -36,7 +36,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 RUN --mount=type=cache,target=/root/.cache/pip \
     pip install --no-cache-dir \
         packaging setuptools wheel \
-        pyyaml gdown triton comfy-cli jupyterlab jupyterlab-lsp \
+        pyyaml gdown triton jupyterlab jupyterlab-lsp \
         jupyter-server jupyter-server-terminals \
         ipykernel jupyterlab_code_formatter && \
     pip cache purge
@@ -44,8 +44,10 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 # ------------------------------------------------------------
 # ComfyUI install
 # ------------------------------------------------------------
-RUN --mount=type=cache,target=/root/.cache/pip \
-    printf 'n\nnvidia\ny\n' | comfy --workspace /home/Ubuntu/ComfyUI install
+RUN git clone https://github.com/comfyanonymous/ComfyUI.git /ComfyUI && \
+    cd /ComfyUI && \
+    pip install --no-cache-dir -r requirements.txt && \
+    pip cache purge
 
 FROM base AS final
 # Make sure to use the virtual environment here too
