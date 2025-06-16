@@ -43,6 +43,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 # ------------------------------------------------------------
 # ComfyUI install
 # ------------------------------------------------------------
+RUN mkdir -p /home/Ubuntu/ComfyUI
 RUN --mount=type=cache,target=/root/.cache/pip \
     /usr/bin/yes | comfy --workspace /home/Ubuntu/ComfyUI install
 
