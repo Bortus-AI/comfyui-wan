@@ -45,7 +45,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 # ComfyUI install
 # ------------------------------------------------------------
 RUN --mount=type=cache,target=/root/.cache/pip \
-    comfy --workspace /home/Ubuntu/ComfyUI install --nvidia --skip-prompt
+    printf 'n\nnvidia\ny\n' | comfy --workspace /home/Ubuntu/ComfyUI install
 
 FROM base AS final
 # Make sure to use the virtual environment here too
